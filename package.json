@@ -1,6 +1,6 @@
 {
   "name": "@gui-chat-plugin/set-image-style",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Set image style modifier plugin for GUIChat",
   "type": "module",
   "main": "./dist/index.cjs",
