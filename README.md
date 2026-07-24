@@ -11,8 +11,11 @@ This plugin allows users to configure the image generation style (realistic, ani
 ## Installation
 
 ```bash
-yarn add @gui-chat-plugin/set-image-style
+yarn add @gui-chat-plugin/set-image-style gui-chat-protocol
 ```
+
+> `gui-chat-protocol` is a peer dependency — install it alongside the plugin; the host application provides the runtime and this plugin only declares the compatible range.
+
 
 ## Usage
 
