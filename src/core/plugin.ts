@@ -18,14 +18,17 @@ export { TOOL_NAME, TOOL_DEFINITION } from "./definition";
  * Execute the setImageStyle function
  * Updates the image generation config to include a style modifier
  */
+// context is nullable on purpose: hosts that run the plugin without client-side
+// state (MulmoClaude's server bridge) pass an empty or missing context, and
+// reading through it unguarded threw a TypeError instead of returning a result.
 export const executeSetImageStyle = async (
-  context: ToolContext,
+  context: ToolContext | null | undefined,
   args: SetImageStyleArgs,
 ): Promise<ToolResult<SetImageStyleData, SetImageStyleJsonData>> => {
   const { styleModifier } = args;
 
   // Check if app context provides image config functions
-  const app = context.app as {
+  const app = context?.app as {
     getImageConfig?: () => ImageGenerationConfig;
     setConfig?: (key: string, value: ImageGenerationConfig) => void;
   };
