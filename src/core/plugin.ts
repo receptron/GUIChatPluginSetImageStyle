@@ -9,6 +9,7 @@ import type {
   SetImageStyleJsonData,
   ImageGenerationConfig,
 } from "./types";
+import { isImageGenerationConfig } from "./hostResponse";
 import { TOOL_DEFINITION } from "./definition";
 
 // Re-export for convenience
@@ -27,13 +28,9 @@ export const executeSetImageStyle = async (
 ): Promise<ToolResult<SetImageStyleData, SetImageStyleJsonData>> => {
   const { styleModifier } = args;
 
-  // Check if app context provides image config functions
-  const app = context?.app as {
-    getImageConfig?: () => ImageGenerationConfig;
-    setConfig?: (key: string, value: ImageGenerationConfig) => void;
-  };
+  const app = context?.app;
 
-  if (!app?.getImageConfig) {
+  if (typeof app?.["getImageConfig"] !== "function") {
     return {
       message: "getImageConfig function not available",
       jsonData: {
@@ -44,7 +41,18 @@ export const executeSetImageStyle = async (
   }
 
   try {
-    const config = app.getImageConfig();
+    const config = app["getImageConfig"]();
+
+    if (!isImageGenerationConfig(config)) {
+      return {
+        message: "getImageConfig returned an unrecognized config",
+        jsonData: {
+          success: false,
+          error: "getImageConfig returned an unrecognized config",
+        },
+      };
+    }
+
     const previousStyleModifier = config.styleModifier || "";
 
     // Update the config with new style modifier
