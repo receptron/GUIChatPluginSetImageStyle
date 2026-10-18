@@ -1,6 +1,7 @@
 # @gui-chat-plugin/set-image-style
 
 [![npm version](https://badge.fury.io/js/%40gui-chat-plugin%2Fset-image-style.svg)](https://www.npmjs.com/package/@gui-chat-plugin/set-image-style)
+[![scoria](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/receptron/GUIChatPluginSetImageStyle/badges/scoria.json)](https://github.com/receptron/GUIChatPluginSetImageStyle/actions/workflows/scoria.yml)
 
 A set-image-style plugin for [MulmoChat](https://github.com/receptron/MulmoChat).
 
