@@ -15,10 +15,7 @@ describe("isImageGenerationConfig", () => {
   });
 
   test("accepts a config that already carries a style modifier", () => {
-    assert.equal(
-      isImageGenerationConfig({ backend: "gemini", styleModifier: "watercolor" }),
-      true,
-    );
+    assert.equal(isImageGenerationConfig({ backend: "gemini", styleModifier: "watercolor" }), true);
   });
 
   test("rejects a config without a backend", () => {
@@ -26,19 +23,12 @@ describe("isImageGenerationConfig", () => {
   });
 
   test("rejects a style modifier that is not a string", () => {
-    assert.equal(
-      isImageGenerationConfig({ backend: "gemini", styleModifier: 42 }),
-      false,
-    );
+    assert.equal(isImageGenerationConfig({ backend: "gemini", styleModifier: 42 }), false);
   });
 
   test("rejects values that are not a config object", () => {
     [null, undefined, "ok", 7].forEach((value) => {
-      assert.equal(
-        isImageGenerationConfig(value),
-        false,
-        `should reject ${JSON.stringify(value)}`,
-      );
+      assert.equal(isImageGenerationConfig(value), false, `should reject ${JSON.stringify(value)}`);
     });
   });
 });
