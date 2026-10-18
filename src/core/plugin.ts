@@ -3,12 +3,7 @@
  */
 
 import type { ToolPluginCore, ToolContext, ToolResult } from "gui-chat-protocol";
-import type {
-  SetImageStyleArgs,
-  SetImageStyleData,
-  SetImageStyleJsonData,
-  ImageGenerationConfig,
-} from "./types";
+import type { SetImageStyleArgs, SetImageStyleData, SetImageStyleJsonData, ImageGenerationConfig } from "./types";
 import { isImageGenerationConfig } from "./hostResponse";
 import { TOOL_DEFINITION } from "./definition";
 
@@ -65,9 +60,7 @@ export const executeSetImageStyle = async (
     app.setConfig?.("imageGenerationBackend", newConfig);
 
     const isClearing = styleModifier.trim() === "";
-    const message = isClearing
-      ? "Image style cleared"
-      : `Image style set to: ${styleModifier.trim()}`;
+    const message = isClearing ? "Image style cleared" : `Image style set to: ${styleModifier.trim()}`;
 
     const instructions = isClearing
       ? "Acknowledge that the image style has been cleared. All future images will be generated without a consistent style modifier."
@@ -96,18 +89,13 @@ export const executeSetImageStyle = async (
         success: false,
         error: error instanceof Error ? error.message : "Unknown error",
       },
-      instructions:
-        "Acknowledge that there was an error setting the image style and ask the user to try again.",
+      instructions: "Acknowledge that there was an error setting the image style and ask the user to try again.",
     };
   }
 };
 
 // Core Plugin (without UI components)
-export const pluginCore: ToolPluginCore<
-  SetImageStyleData,
-  SetImageStyleJsonData,
-  SetImageStyleArgs
-> = {
+export const pluginCore: ToolPluginCore<SetImageStyleData, SetImageStyleJsonData, SetImageStyleArgs> = {
   toolDefinition: TOOL_DEFINITION,
   execute: executeSetImageStyle,
   generatingMessage: "Setting image style...",
